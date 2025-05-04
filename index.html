@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,22 +44,16 @@
       flex-direction: row;
       justify-content: space-between;
     }
-    .media-box {
+    .image-box {
       width: 45%;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 16px;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
-    .media-box img {
+    .image-box img {
       width: 100%;
       max-width: 200px;
       height: auto;
-    }
-    .media-box video {
-      width: 100%;
-      max-width: 200px;
-      border: 4px solid pink;
     }
     .text-box {
       width: 55%;
@@ -68,6 +63,8 @@
       overflow-y: auto;
       max-height: 400px;
     }
+    .hidden { display: none; }
+    .visible { display: block; }
     .form-box {
       margin-top: 20px;
       width: 100%;
@@ -110,12 +107,8 @@
   <div class="main">
     <div class="content">
       <div class="text-box" id="reveal"></div>
-      <div class="media-box">
+      <div class="image-box">
         <img src="cat.jpg" alt="cat" />
-        <video autoplay loop controls playsinline>
-          <source src="e47f8b3e-d70e-4233-a9f8-42f54c241493.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
       </div>
     </div>
     <div class="form-box" id="form">
@@ -138,15 +131,16 @@
       th: "'th' ✭s ab✪ut th✪ughts and the✭ries.",
       p: `"to them
 -에언자 같은 움직임. 쇠퇴한 문명의 거대한 비밀을 털어놓으려는 지적인 머뭇거림.
-유감스럽게도 이 인류의 문명은 처참히 침몰 중이야.
+유감스립게도 이 인류의 문명은 처참히 침몰 중이야.
 글쎄, 정신적으로는 물론이고 물질적으로도 다름없어.
-과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.
-싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각기,
-펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지.
-생각하지 못하는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는
-인간들이 점점 늘어나고 있어.
-무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았지만
-사실 당신이 더 낫다는 걸 난 알아.
+과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하
+거든.
+싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각
+기, 펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지. 생각하지 못하
+는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점
+늘어나고 있어.
+무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았
+지만 사실 당신이 더 낫다는 걸 난 알아.
 최소한 당신은 이곳이 진짜가 아니라는 걸 알고 있으니까.
 당신의 이야기를 내 두 눈으로 다시 볼 수 있다면 좋을 텐데.
 그 눈알이 영사기가 되어 모든 걸 볼 수 있게 된다면 난 아마도 울 것 같아.
