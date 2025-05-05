@@ -17,12 +17,12 @@
 
     .left {
       position: absolute;
-      top: 10px;
+      top: 20px;
       left: 0;
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
+      transform: rotate(90deg);
+      transform-origin: left top;
       font-size: 18px;
-      padding: 12px 4px;
+      padding: 4px;
     }
 
     .center {
@@ -123,3 +123,51 @@
   <script>
     const texts = {
       t: "'t' ✻s ab✪ut th✪ughts and tales.",
+      H: "'H' ✻s ab✪ut hidden things.",
+      M: "'月' ✻s ab✪ut m✪✪n and mem✪ry.",
+      w: "'w' ✪s ab✪ut w✪ndering and w✪ndering.",
+      th: "'th' ✭s ab✪ut th✪ughts and the✭ries.",
+      p: `"to them
+-에언자 같은 움직임. 쇠퇴한 문명의 거대한 비밀을 털어놓으려는 지적인 머뭇거림.
+유감스립게도 이 인류의 문명은 처참히 침몰 중이야.
+글쎄, 정신적으로는 물론이고 물질적으로도 다름없어.
+과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.
+싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각기, 펌프 따위는
+단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지.
+생각하지 못하는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점 늘어나고 있어.
+무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았지만
+사실 당신이 더 낫다는 걸 난 알아.
+최소한 당신은 이곳이 진짜가 아니라는 걸 알고 있으니까.
+당신의 이야기를 내 두 눈으로 다시 볼 수 있다면 좋을 텐데.
+그 눈알이 영사기가 되어 모든 걸 볼 수 있게 된다면 난 아마도 울 것 같아.
+하지만 물속에서의 눈물은 아무 의미가 없겠지.
+인간의 근본 기분은 슬픔이라던 모니카 소설의 구절이 생각나.
+그러니까 내 말은, 모든 건 그곳에서부터 비롯된 것 같아."`
+    };
+
+    function show(key) {
+      const box = document.getElementById("reveal");
+      box.innerText = texts[key] || "";
+    }
+
+    function scrollToForm() {
+      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function sendMessage(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch("https://script.google.com/macros/s/AKfycbyrsg5zHjNSKNWP3KoMPMxxKhU64CDNuNDnDLBg3DWCl71Kw2_IcqsirvF6M70cXZ4/exec", {
+        method: "POST",
+        body: new URLSearchParams(data)
+      }).then(() => {
+        alert("메시지가 전송되었습니다.");
+        form.reset();
+      }).catch(() => {
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
+      });
+    }
+  </script>
+</body>
+</html>
