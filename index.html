@@ -5,9 +5,7 @@
   <title>jinisgam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Georgia', serif;
@@ -16,59 +14,49 @@
       overflow-x: hidden;
       position: relative;
     }
-
     .left {
       position: fixed;
-      top: 30px;
-      left: 0;
+      top: 80px;
+      left: 10px;
+      writing-mode: vertical-rl;
       transform: rotate(90deg);
-      transform-origin: left top;
       font-size: 18px;
       z-index: 999;
     }
-
     .letter {
       position: absolute;
       font-size: 24px;
       cursor: pointer;
     }
-
-    /* 자유 위치 배치 */
-    #t   { top: 100px; left: 55%; }
-    #H   { top: 160px; left: 52%; }
-    #M   { top: 230px; left: 58%; }
-    #p   { top: 300px; left: 54%; }
-    #w   { top: 370px; left: 49%; }
-    #th  { top: 440px; left: 53%; }
-    #m   { top: 510px; left: 56%; }
-
+    #t   { top: 120px;  left: 50%; }
+    #H   { top: 190px;  left: 53%; }
+    #M   { top: 260px;  left: 48%; }
+    #p   { top: 330px;  left: 55%; }
+    #w   { top: 400px;  left: 47%; }
+    #th  { top: 470px;  left: 50%; }
+    #m   { top: 540px;  left: 52%; }
     .text-box {
       position: absolute;
-      top: 580px;
+      top: 610px;
       left: 10%;
       width: 80%;
       font-style: italic;
       font-size: 15px;
       white-space: pre-wrap;
-      line-height: 1.5;
     }
-
     .form-box {
       position: absolute;
-      top: 800px;
+      top: 760px;
       width: 100%;
       max-width: 350px;
       padding: 10px;
       left: 50%;
       transform: translateX(-50%);
     }
-
     .form-box label {
       font-size: 14px;
     }
-
-    .form-box input,
-    .form-box textarea {
+    .form-box input, .form-box textarea {
       width: 100%;
       font-size: 14px;
       border: none;
@@ -78,7 +66,6 @@
       background: transparent;
       font-family: 'Georgia', serif;
     }
-
     .form-box button {
       font-size: 16px;
       color: darkred;
@@ -91,7 +78,6 @@
 </head>
 <body>
   <div class="left">jin is</div>
-
   <div id="t" class="letter" onclick="show('t')">t</div>
   <div id="H" class="letter" onclick="show('H')">H</div>
   <div id="M" class="letter" onclick="show('M')">月</div>
@@ -99,9 +85,7 @@
   <div id="w" class="letter" onclick="show('w')">w</div>
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm()">m</div>
-
   <div class="text-box" id="reveal"></div>
-
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label>* n✹m⚝</label>
@@ -111,7 +95,6 @@
       <button type="submit">S✺nd!</button>
     </form>
   </div>
-
   <script>
     const texts = {
       t: "'t' ✻s ab✪ut th✪ughts and tales.",
@@ -123,9 +106,14 @@
 -에언자 같은 움직임. 쇠퇴한 문명의 거대한 비밀을 털어놓으려는 지적인 머뭇거림.
 유감스럽게도 이 인류의 문명은 처참히 침몰 중이야.
 글쎄, 정신적으로는 물론이고 물질적으로도 다름없어.
-과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.
-싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각기, 펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지. 생각하지 못하는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점 늘어나고 있어.
-무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았지만 사실 당신이 더 낫다는 걸 난 알아.
+과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하
+거든.
+싱싱한 활어의 상태 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각
+기, 펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지. 생각하지 못하
+는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점
+늘어나고 있어.
+무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았
+지만 사실 당신이 더 낫다는 걸 난 알아.
 최소한 당신은 이곳이 진짜가 아니라는 걸 알고 있으니까.
 당신의 이야기를 내 두 눈으로 다시 볼 수 있다면 좋을 텐데.
 그 눈알이 영사기가 되어 모든 걸 볼 수 있게 된다면 난 아마도 울 것 같아.
@@ -133,16 +121,13 @@
 인간의 근본 기분은 슬픔이라던 모니카 소설의 구절이 생각나.
 그러니까 내 말은, 모든 건 그곳에서부터 비롯된 것 같아."`
     };
-
     function show(key) {
       const box = document.getElementById("reveal");
       box.innerText = texts[key] || "";
     }
-
     function scrollToForm() {
       document.getElementById("form").scrollIntoView({ behavior: "smooth" });
     }
-
     function sendMessage(e) {
       e.preventDefault();
       const form = e.target;
