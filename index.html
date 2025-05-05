@@ -27,26 +27,16 @@
 
     .center {
       position: absolute;
-      top: 45%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
       font-size: 20px;
-      pointer-events: none;
-    }
-
-    .center div {
-      position: absolute;
       cursor: pointer;
-      pointer-events: auto;
     }
-
-    .center div:nth-child(1) { top: -120px; left: -40px; } /* t */
-    .center div:nth-child(2) { top: -60px; left: 10px; }   /* H */
-    .center div:nth-child(3) { top: -10px; left: 80px; }   /* 月 */
-    .center div:nth-child(4) { top: 60px; left: 90px; }    /* p */
-    .center div:nth-child(5) { top: 100px; left: 10px; }   /* w */
-    .center div:nth-child(6) { top: 120px; left: -40px; }  /* th */
-    .center div:nth-child(7) { top: 60px; left: -100px; }  /* m */
 
     .main {
       position: absolute;
@@ -62,9 +52,9 @@
       font-style: italic;
       white-space: pre-line;
       overflow-y: auto;
-      max-height: 200px;
+      max-height: 150px;
       width: 90%;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .form-box {
@@ -77,7 +67,8 @@
       font-size: 14px;
     }
 
-    .form-box input, .form-box textarea {
+    .form-box input,
+    .form-box textarea {
       width: 100%;
       font-size: 14px;
       border: none;
@@ -101,18 +92,6 @@
       cursor: pointer;
       padding: 4px;
     }
-
-    .image-box {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 120px;
-    }
-
-    .image-box img {
-      width: 100%;
-      height: auto;
-    }
   </style>
 </head>
 <body>
@@ -126,10 +105,6 @@
     <div onclick="show('w')">w</div>
     <div onclick="show('th')">th</div>
     <div onclick="scrollToForm()">m</div>
-  </div>
-
-  <div class="image-box">
-    <img src="cat.jpg" alt="cat" />
   </div>
 
   <div class="main">
