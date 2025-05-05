@@ -20,9 +20,9 @@
     .left {
       position: fixed;
       top: 20px;
-      left: 0;
-      transform: rotate(90deg);
-      transform-origin: left top;
+      left: 10px;
+      writing-mode: vertical-rl;
+      transform: rotate(-90deg);
       font-size: 18px;
       z-index: 999;
     }
@@ -33,22 +33,21 @@
       cursor: pointer;
     }
 
-    #t   { top: 100px;  left: 45%; }
-    #H   { top: 160px;  left: 48%; }
-    #M   { top: 220px;  left: 53%; }
-    #p   { top: 290px;  left: 50%; }
-    #w   { top: 360px;  left: 44%; }
-    #th  { top: 430px;  left: 47%; }
-    #m   { top: 500px;  left: 51%; }
+    #t   { top: 80px;  left: 45%; }
+    #H   { top: 140px; left: 48%; }
+    #M   { top: 200px; left: 53%; }
+    #p   { top: 270px; left: 50%; }
+    #w   { top: 340px; left: 44%; }
+    #th  { top: 410px; left: 47%; }
+    #m   { top: 480px; left: 51%; }
 
     .text-box {
       position: absolute;
+      width: 80%;
+      left: 10%;
       font-style: italic;
       font-size: 15px;
       white-space: pre-wrap;
-      max-width: 80%;
-      pointer-events: none;
-      z-index: 100;
     }
 
     .form-box {
@@ -85,6 +84,7 @@
       cursor: pointer;
       padding: 4px;
     }
+
   </style>
 </head>
 <body>
@@ -98,7 +98,7 @@
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm()">m</div>
 
-  <div id="reveal" class="text-box"></div>
+  <div class="text-box" id="reveal" style="top: 30px;"></div>
 
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
@@ -139,13 +139,9 @@
 
     function show(key) {
       const box = document.getElementById("reveal");
-      const target = document.getElementById(key);
-      const rect = target.getBoundingClientRect();
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
       box.innerText = texts[key] || "";
-      box.style.left = rect.left + "px";
-      box.style.top = (rect.top + scrollTop - 80) + "px";
+      const target = document.getElementById(key);
+      box.style.top = (target.offsetTop - 80) + "px";
     }
 
     function scrollToForm() {
