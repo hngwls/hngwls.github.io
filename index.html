@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,50 +10,48 @@
       margin: 0;
       font-family: 'Georgia', serif;
       background: white;
-      display: flex;
-      flex-direction: row;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
     .left {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      transform: rotate(90deg);
       font-size: 18px;
-      padding: 16px 4px;
     }
     .center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      padding: 20px 6px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .center div {
+      position: absolute;
       font-size: 18px;
       cursor: pointer;
     }
+
+    .center div:nth-child(1) { top: -60px; left: -40px; } /* H */
+    .center div:nth-child(2) { top: -40px; left: 30px; }  /* 月 */
+    .center div:nth-child(3) { top: 10px; left: -60px; }  /* d */
+    .center div:nth-child(4) { top: 20px; left: 10px; }   /* W */
+    .center div:nth-child(5) { top: 60px; left: -30px; }  /* th */
+    .center div:nth-child(6) { top: 80px; left: 40px; }   /* m */
+    .center div:nth-child(7) { top: 0px; left: -10px; }   /* p */
+
     .main {
-      flex-grow: 1;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 800px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 10px;
-    }
-    .content {
-      display: flex;
-      flex-direction: row;
       justify-content: space-between;
     }
-    .image-box {
-      width: 45%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-    }
-    .image-box img {
-      width: 100%;
-      max-width: 200px;
-      height: auto;
-    }
+
     .text-box {
       width: 55%;
       font-size: 15px;
@@ -63,17 +60,36 @@
       overflow-y: auto;
       max-height: 400px;
     }
-    .hidden { display: none; }
-    .visible { display: block; }
-    .form-box {
-      margin-top: 20px;
+
+    .media-box {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .media-box img {
       width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    .form-box {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
       max-width: 350px;
     }
+
     .form-box label {
       font-size: 14px;
     }
-    .form-box input, .form-box textarea {
+
+    .form-box input,
+    .form-box textarea {
       width: 100%;
       font-size: 14px;
       border: none;
@@ -83,6 +99,12 @@
       background: transparent;
       font-family: 'Georgia', serif;
     }
+
+    .form-box input::placeholder,
+    .form-box textarea::placeholder {
+      color: gray;
+    }
+
     .form-box button {
       font-size: 16px;
       color: darkred;
@@ -95,58 +117,58 @@
 </head>
 <body>
   <div class="left">jin is</div>
+
   <div class="center">
-    <div onclick="show('t')">t</div>
     <div onclick="show('H')">H</div>
     <div onclick="show('M')">月</div>
-    <div onclick="show('p')">p</div>
-    <div onclick="show('w')">w</div>
+    <div onclick="show('d')">d</div>
+    <div onclick="show('W')">W</div>
     <div onclick="show('th')">th</div>
+    <div onclick="show('p')">p</div>
     <div onclick="scrollToForm()">m</div>
   </div>
+
   <div class="main">
-    <div class="content">
-      <div class="text-box" id="reveal"></div>
-      <div class="image-box">
-        <img src="cat.jpg" alt="cat" />
-      </div>
+    <div class="text-box" id="reveal"></div>
+    <div class="media-box">
+      <img src="cat.jpg" alt="cat" />
     </div>
-    <div class="form-box" id="form">
-      <form onsubmit="sendMessage(event)">
-        <label>⍣ n✹m⚝</label>
-        <input type="text" name="name" placeholder="n✹m⚝" required />
-        <label>⍣ m⚝ss⚝g⚝</label>
-        <textarea name="message" rows="3" placeholder="m⚝ss⚝g⚝" required></textarea>
-        <button type="submit">S✺nd!</button>
-      </form>
-    </div>
+  </div>
+
+  <div class="form-box" id="form">
+    <form onsubmit="sendMessage(event)">
+      <label>⍣ n✹m⚝</label>
+      <input type="text" name="name" placeholder="*S" required />
+      <label>⍣ m⚝ss⚝g⚝</label>
+      <textarea name="message" rows="3" placeholder="*s" required></textarea>
+      <button type="submit">S✺nd!</button>
+    </form>
   </div>
 
   <script>
     const texts = {
-      t: "'t' ✻s ab✪ut th✪ughts and tales.",
       H: "'H' ✻s ab✪ut hidden things.",
       M: "'月' ✻s ab✪ut m✪✪n and mem✪ry.",
-      w: "'w' ✪s ab✪ut w✪ndering and w✪ndering.",
+      d: "'d' ✪s ab✪ut dreams and delays.",
+      W: "'W' ✪s ab✪ut w✪ndering and w✪ndering.",
       th: "'th' ✭s ab✪ut th✪ughts and the✭ries.",
-      p: `"to them
+      p: `to them
 -에언자 같은 움직임. 쇠퇴한 문명의 거대한 비밀을 털어놓으려는 지적인 머뭇거림.
-유감스립게도 이 인류의 문명은 처참히 침몰 중이야.
+유감스럽게도 이 인류의 문명은 처참히 침몰 중이야.
 글쎄, 정신적으로는 물론이고 물질적으로도 다름없어.
-과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하
-거든.
-싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각
-기, 펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지. 생각하지 못하
-는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점
-늘어나고 있어.
-무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았
-지만 사실 당신이 더 낫다는 걸 난 알아.
+과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.
+싱싱한 활어의 상대 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각기,
+펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지.
+생각하지 못하는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는
+인간들이 점점 늘어나고 있어.
+무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았지만
+사실 당신이 더 낫다는 걸 난 알아.
 최소한 당신은 이곳이 진짜가 아니라는 걸 알고 있으니까.
 당신의 이야기를 내 두 눈으로 다시 볼 수 있다면 좋을 텐데.
 그 눈알이 영사기가 되어 모든 걸 볼 수 있게 된다면 난 아마도 울 것 같아.
 하지만 물속에서의 눈물은 아무 의미가 없겠지.
 인간의 근본 기분은 슬픔이라던 모니카 소설의 구절이 생각나.
-그러니까 내 말은, 모든 건 그곳에서부터 비롯된 것 같아."`
+그러니까 내 말은, 모든 건 그곳에서부터 비롯된 것 같아.`
     };
 
     function show(key) {
