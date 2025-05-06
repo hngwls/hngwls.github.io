@@ -41,6 +41,16 @@
     #th  { top: 360px; left: 50%; }
     #m   { top: 420px; left: 54%; }
 
+    .video-embed {
+      position: absolute;
+      top: 120px;
+      left: 63%;
+      width: 150px;
+      height: 84px;
+      z-index: 500;
+      pointer-events: none;
+    }
+
     .text-box {
       position: absolute;
       top: 10px;
@@ -86,16 +96,6 @@
       cursor: pointer;
       padding: 4px;
     }
-
-    .video-embed {
-      position: absolute;
-      top: 120px;
-      left: 58%;
-      width: 180px;
-      height: 100px;
-      z-index: 500;
-      pointer-events: none;
-    }
   </style>
 </head>
 <body>
@@ -103,19 +103,21 @@
 
   <div id="t" class="letter" onclick="show('t')">t</div>
   <div id="H" class="letter" onclick="show('H')">H</div>
+
+  <!-- 유튜브 영상 -->
+  <iframe class="video-embed"
+    src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
+    title="YouTube video"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
+
   <div id="M" class="letter" onclick="show('M')">月</div>
   <div id="p" class="letter" onclick="show('p')">p</div>
   <div id="w" class="letter" onclick="show('w')">w</div>
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm()">m</div>
-
-  <!-- YouTube embed (작게, 자동재생, 반복, 음소거, 클릭 차단) -->
-  <iframe class="video-embed"
-    src="https://www.youtube-nocookie.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=aKIf0UeFUT0"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
 
   <div class="text-box" id="reveal"></div>
 
