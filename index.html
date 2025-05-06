@@ -41,6 +41,16 @@
     #th  { top: 360px; left: 50%; }
     #m   { top: 420px; left: 54%; }
 
+    .video-embed {
+      position: absolute;
+      top: 170px; /* M의 top과 맞춤 */
+      left: 62%; /* M 오른쪽 위치 */
+      width: 140px;
+      height: 80px;
+      border: none;
+      z-index: 500;
+    }
+
     .text-box {
       position: absolute;
       top: 10px;
@@ -93,20 +103,18 @@
 
   <div id="t" class="letter" onclick="show('t')">t</div>
   <div id="H" class="letter" onclick="show('H')">H</div>
-    <!-- 유튜브 영상 -->
-  <iframe class="video-embed"
-    src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
-    title="YouTube video"
-    frameborder="0"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
-
   <div id="M" class="letter" onclick="show('M')">月</div>
   <div id="p" class="letter" onclick="show('p')">p</div>
   <div id="w" class="letter" onclick="show('w')">w</div>
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm()">m</div>
+
+  <iframe class="video-embed"
+    src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
+    title="YouTube video"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
 
   <div class="text-box" id="reveal"></div>
 
