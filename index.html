@@ -5,9 +5,7 @@
   <title>jin is</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Georgia', serif;
@@ -16,7 +14,6 @@
       overflow-x: hidden;
       font-size: 15px;
     }
-
     .left {
       position: fixed;
       top: 30px;
@@ -25,13 +22,11 @@
       font-size: 16px;
       z-index: 1000;
     }
-
     .letter {
       position: absolute;
       font-size: 22px;
       cursor: pointer;
     }
-
     #t   { top: 60px;  left: 51%; }
     #H   { top: 120px; left: 48%; }
     #M   { top: 180px; left: 53%; }
@@ -42,8 +37,8 @@
 
     .video-embed {
       position: absolute;
-      top: 170px; /* M의 top과 맞춤 */
-      left: 62%; /* M 오른쪽 위치 */
+      top: 170px;
+      left: 62%;
       width: 140px;
       height: 80px;
       border: none;
@@ -51,15 +46,26 @@
     }
 
     .text-box {
+      display: none;
       position: absolute;
-      top: 10px;
-      left: 100px;
-      right: 20px;
       font-style: italic;
       font-size: 13px;
-      white-space: pre-wrap;
+      background: #fff8f0;
+      border: 1px solid #ccc;
+      padding: 4px 6px;
+      border-radius: 4px;
+      max-width: 200px;
       z-index: 999;
     }
+    /* 텍스트 박스 위치: 왼쪽 */
+    #text-t  { top: 60px;  left: 45%; }
+    #text-H  { top: 120px; left: 42%; }
+    #text-M  { top: 180px; left: 47%; }
+    #text-p  { top: 240px; left: 44%; }
+    /* 텍스트 박스 위치: 오른쪽 */
+    #text-w  { top: 300px; left: 52%; }
+    #text-th { top: 360px; left: 54%; }
+    #text-m  { top: 420px; left: 56%; }
 
     .form-box {
       position: absolute;
@@ -70,11 +76,7 @@
       left: 50%;
       transform: translateX(-50%);
     }
-
-    .form-box label {
-      font-size: 14px;
-    }
-
+    .form-box label { font-size: 14px; }
     .form-box input,
     .form-box textarea {
       width: 100%;
@@ -86,7 +88,6 @@
       background: transparent;
       font-family: 'Georgia', serif;
     }
-
     .form-box button {
       font-size: 16px;
       color: darkred;
@@ -106,7 +107,7 @@
   <div id="p" class="letter" onclick="show('p')">p</div>
   <div id="w" class="letter" onclick="show('w')">w</div>
   <div id="th" class="letter" onclick="show('th')">th</div>
-  <div id="m" class="letter" onclick="scrollToForm()">m</div>
+  <div id="m" class="letter" onclick="scrollToForm(); show('m')">m</div>
 
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
@@ -115,13 +116,20 @@
     allowfullscreen>
   </iframe>
 
-  <div class="text-box" id="reveal"></div>
+  <!-- 각각의 텍스트 박스 -->
+  <div id="text-t" class="text-box"></div>
+  <div id="text-H" class="text-box"></div>
+  <div id="text-M" class="text-box"></div>
+  <div id="text-p" class="text-box"></div>
+  <div id="text-w" class="text-box"></div>
+  <div id="text-th" class="text-box"></div>
+  <div id="text-m" class="text-box"></div>
 
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label>* n✹m⚝</label>
       <input type="text" name="name" placeholder="*S" required />
-      <label>* m⚝ss⚝g⚝</label>
+      <label>* m⚝m⚝g⚝</label>
       <textarea name="message" rows="3" placeholder="*s" required></textarea>
       <button type="submit">S✺nd!</button>
     </form>
@@ -132,14 +140,22 @@
       t: "'t' ✼s ab✪ut th✪ughts and tales.",
       H: "'H' ✼s ab✪ut hidden things.",
       M: "'月' ✵s ab✪ut m✪✪n and mem✪ry.",
-      p: "'p' ≛s ab✪ut p≛ctures and p✪etry.",
+      p: "'p' ≛s ab✪ut p≛pictures and p✪etry.",
       w: "'w' ⊛s ab✪ut wandering and w✪ndering.",
-      th: "'th' ✰s ab✪ut th✪ughts and the✪ries."
+      th: "'th' ✰s ab✪ut th✪ughts and the✪ries.",
+      m: "'m' is about memories."
     };
 
     function show(key) {
-      const box = document.getElementById("reveal");
-      box.innerText = texts[key] || "";
+      // 모든 박스를 숨김
+      const all = document.querySelectorAll('.text-box');
+      all.forEach(el => el.style.display = 'none');
+      // 해당 박스만 표시
+      const box = document.getElementById(`text-${key}`);
+      if (box) {
+        box.innerText = texts[key] || '';
+        box.style.display = 'block';
+      }
     }
 
     function scrollToForm() {
