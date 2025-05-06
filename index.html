@@ -87,14 +87,14 @@
       padding: 4px;
     }
 
-    /* YouTube iframe 위치 조정 */
     .video-embed {
       position: absolute;
       top: 120px;
       left: 58%;
-      width: 250px;
-      height: 140px;
+      width: 180px;
+      height: 100px;
       z-index: 500;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -109,7 +109,7 @@
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm()">m</div>
 
-  <!-- YouTube iframe -->
+  <!-- YouTube embed (작게, 자동재생, 반복, 음소거, 클릭 차단) -->
   <iframe class="video-embed"
     src="https://www.youtube-nocookie.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=aKIf0UeFUT0"
     frameborder="0"
