@@ -45,7 +45,14 @@
       z-index: 500;
     }
 
-    /* ✅ 텍스트 박스 하나만 - 화면 중앙 위쪽에 고정 */
+    /* ✅ PC에서만 영상 크게 */
+    @media screen and (min-width: 768px) {
+      .video-embed {
+        width: 260px;
+        height: 150px;
+      }
+    }
+
     .text-box {
       display: none;
       position: absolute;
@@ -116,10 +123,10 @@
     allowfullscreen>
   </iframe>
 
-  <!-- ✅ 공통 텍스트 박스 -->
+  <!-- 텍스트 출력 박스 -->
   <div class="text-box" id="reveal"></div>
 
-  <!-- 메시지 입력 폼 -->
+  <!-- 메시지 폼 -->
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label>* n✹m⚝</label>
