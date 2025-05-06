@@ -33,7 +33,7 @@
       cursor: pointer;
     }
 
-    /* 자유 배치된 중앙 알파벳 */
+    /* 중앙 알파벳 위치 */
     #t   { top: 60px;  left: 53%; }
     #H   { top: 120px; left: 50%; }
     #M   { top: 180px; left: 55%; }
@@ -41,6 +41,16 @@
     #w   { top: 300px; left: 48%; }
     #th  { top: 360px; left: 50%; }
     #m   { top: 420px; left: 54%; }
+
+    /* 유튜브 영상 위치 */
+    .youtube {
+      position: absolute;
+      top: 120px;  /* H와 같은 높이 */
+      left: 60%;   /* H보다 오른쪽 */
+      width: 180px;
+      height: 100px;
+      border: none;
+    }
 
     .text-box {
       position: absolute;
@@ -94,6 +104,7 @@
 
   <div id="t" class="letter" onclick="show('t')">t</div>
   <div id="H" class="letter" onclick="show('H')">H</div>
+  <iframe class="youtube" src="https://www.youtube.com/embed/aKIf0UeFUT0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   <div id="M" class="letter" onclick="show('M')">月</div>
   <div id="p" class="letter" onclick="show('p')">p</div>
   <div id="w" class="letter" onclick="show('w')">w</div>
@@ -123,7 +134,16 @@
 -에언자 같은 움직임. 쇠퇴한 문명의 거대한 비밀을 털어놓으려는 지적인 머뭇거림.
 유감스럽게도 이 인류의 문명은 처참히 침몰 중이야.
 글쎄, 정신적으로는 물론이고 물질적으로도 다름없어.
-과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.`
+과도하게 발전한 기술의 열매만 따 먹고 자란 세대들은 본질을 알 필요를 느끼지 못하거든.
+싱싱한 활어의 상태 유지를 위해 설치된 당신 수조의 자동온도조절기나 여과재, 냉각기, 펌프 따위는 단지 당신의 아가미와 탱탱한 살점만을 위해 작동하지.
+생각하지 못하는 것들에 통계적인 정보들을 넣어놓고 스스로는 텅 비어지길 원하는 인간들이 점점 늘어나고 있어.
+무능력하게 혹은 무력하게 느릿하고 멍텅해진 그들의 동공은 꼭 당신의 눈알과 닮았지만 사실 당신이 더 낫다는 걸 난 알아.
+최소한 당신은 이곳이 진짜가 아니라는 걸 알고 있으니까.
+당신의 이야기를 내 두 눈으로 다시 볼 수 있다면 좋을 텐데.
+그 눈알이 영사기가 되어 모든 걸 볼 수 있게 된다면 난 아마도 울 것 같아.
+하지만 물속에서의 눈물은 아무 의미가 없겠지.
+인간의 근본 기분은 슬픔이라던 모니카 소설의 구절이 생각나.
+그러니까 내 말은, 모든 건 그곳에서부터 비롯된 것 같아.`
     };
 
     function show(key) {
