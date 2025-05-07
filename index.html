@@ -70,29 +70,31 @@
     .form-box {
       position: absolute;
       top: 500px;
-      width: 90%;
-      max-width: 350px;
-      padding: 10px;
+      width: 40%;        /* 가로 크기 줄임 */
+      max-width: 200px;  /* 최대 가로 제한 */
+      padding: 6px;
       left: 50%;
       transform: translateX(-50%);
     }
 
-    .form-box label { font-size: 14px; }
+    .form-box label {
+      font-size: 13px;
+    }
 
     .form-box input,
     .form-box textarea {
       width: 100%;
-      font-size: 14px;
+      font-size: 12px;       /* 글자도 약간 축소 */
+      padding: 4px 3px;
       border: none;
       border-bottom: 1px solid #999;
-      margin-bottom: 12px;
-      padding: 5px 4px;
+      margin-bottom: 10px;
       background: transparent;
       font-family: 'Georgia', serif;
     }
 
     .form-box button {
-      font-size: 16px;
+      font-size: 14px;
       color: darkred;
       background: none;
       border: none;
@@ -100,22 +102,20 @@
       padding: 4px;
     }
 
-    /* 캐릭터 이미지 */
     .char-img {
       position: absolute;
       width: 50px;
       height: auto;
     }
 
-    #char1 { top: 120px; left: 33%; } /* H 왼쪽 */
-    #char2 { top: 380px; left: 34%; } /* w 왼쪽 */
-    #char3 { top: 420px; left: 59%; } /* m 오른쪽 */
+    #char1 { top: 120px; left: 33%; }
+    #char2 { top: 380px; left: 34%; }
+    #char3 { top: 420px; left: 59%; }
   </style>
 </head>
 <body>
   <div class="left">jin is</div>
 
-  <!-- 알파벳 -->
   <div id="t" class="letter" onclick="show('t')">t</div>
   <div id="H" class="letter" onclick="show('H')">H</div>
   <div id="M" class="letter" onclick="show('M')">月</div>
@@ -124,12 +124,10 @@
   <div id="th" class="letter" onclick="show('th')">th</div>
   <div id="m" class="letter" onclick="scrollToForm(); show('m')">m</div>
 
-  <!-- 캐릭터 이미지 3개 -->
   <img src="char1.png" class="char-img" id="char1" />
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
-  <!-- 유튜브 영상 -->
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     title="YouTube video"
@@ -137,10 +135,8 @@
     allowfullscreen>
   </iframe>
 
-  <!-- 텍스트 박스 -->
   <div class="text-box" id="reveal"></div>
 
-  <!-- 메시지 입력 폼 -->
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label>* n✹m⚝</label>
