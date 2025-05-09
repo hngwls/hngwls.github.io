@@ -70,8 +70,8 @@
     .form-box {
       position: absolute;
       top: 500px;
-      width: 55%;        /* 가로 크기 줄임 */
-      max-width: 250px;  /* 최대 가로 제한 */
+      width: 55%;
+      max-width: 250px;
       padding: 6px;
       left: 50%;
       transform: translateX(-50%);
@@ -84,7 +84,7 @@
     .form-box input,
     .form-box textarea {
       width: 100%;
-      font-size: 12px;       /* 글자도 약간 축소 */
+      font-size: 12px;
       padding: 4px 3px;
       border: none;
       border-bottom: 1px solid #999;
@@ -111,18 +111,39 @@
     #char1 { top: 120px; left: 33%; }
     #char2 { top: 380px; left: 34%; }
     #char3 { top: 420px; left: 59%; }
+
+    /* 별 애니메이션 */
+    .star {
+      position: absolute;
+      color: gold;
+      font-size: 12px;
+      opacity: 0;
+      animation: floatStar 1.2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatStar {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="left">jin is</div>
 
-  <div id="t" class="letter" onclick="show('t')">t</div>
-  <div id="H" class="letter" onclick="show('H')">H</div>
-  <div id="M" class="letter" onclick="show('M')">月</div>
-  <div id="p" class="letter" onclick="show('p')">p</div>
-  <div id="w" class="letter" onclick="show('w')">w</div>
-  <div id="th" class="letter" onclick="show('th')">th</div>
-  <div id="m" class="letter" onclick="scrollToForm(); show('m')">m</div>
+  <div id="t" class="letter" onclick="show('t'); animateStar(this)">t</div>
+  <div id="H" class="letter" onclick="show('H'); animateStar(this)">H</div>
+  <div id="M" class="letter" onclick="show('M'); animateStar(this)">月</div>
+  <div id="p" class="letter" onclick="show('p'); animateStar(this)">p</div>
+  <div id="w" class="letter" onclick="show('w'); animateStar(this)">w</div>
+  <div id="th" class="letter" onclick="show('th'); animateStar(this)">th</div>
+  <div id="m" class="letter" onclick="scrollToForm(); show('m'); animateStar(this)">m</div>
 
   <img src="char1.png" class="char-img" id="char1" />
   <img src="char2.png" class="char-img" id="char2" />
@@ -181,6 +202,17 @@
       }).catch(() => {
         alert("오류가 발생했습니다. 다시 시도해주세요.");
       });
+    }
+
+    function animateStar(element) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.innerText = '★';
+      const rect = element.getBoundingClientRect();
+      star.style.left = `${rect.left + rect.width / 2}px`;
+      star.style.top = `${rect.top}px`;
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 1200);
     }
   </script>
 </body>
