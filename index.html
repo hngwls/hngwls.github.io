@@ -25,9 +25,20 @@
     }
 
     .letter {
-      position: absolute;
-      font-size: 22px;
-      cursor: pointer;
+  position: absolute;
+  font-size: 22px;
+  cursor: pointer;
+  color: #111;
+  padding: 3px 4px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(1px);
+  transition: all 0.3s ease-in-out;
+}
+
+.letter:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
     }
 
     #t   { top: 90px;  left: 51%; }
