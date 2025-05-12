@@ -115,7 +115,7 @@
     /* 별 애니메이션 */
     .star {
       position: absolute;
-      color: black;
+      color: dfe6f0;
       font-size: 8px;
       opacity: 0;
       animation: floatStar 1.4s ease-out forwards;
@@ -210,7 +210,7 @@
       star.innerText = '★';
       const rect = element.getBoundingClientRect();
       star.style.left = `${rect.left + rect.width / 2}px`;
-      star.style.top = `${rect.top+window,scrollY+15}px`;
+      star.style.top = `${rect.top+15}px`;
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 1200);
     }
