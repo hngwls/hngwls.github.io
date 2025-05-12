@@ -210,7 +210,7 @@
       star.innerText = '★';
       const rect = element.getBoundingClientRect();
       star.style.left = `${rect.left + rect.width / 2}px`;
-      star.style.top = `${rect.top}px`;
+      star.style.top = `${rect.top+window,scrollY+15}px`;
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 1200);
     }
