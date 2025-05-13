@@ -112,25 +112,6 @@
     #char2 { top: 460px; left: 34%; }
     #char3 { top: 520px; left: 59%; }
 
-    /* 별 애니메이션 */
-    .star {
-      position: absolute;
-      color: dfe6f0;
-      font-size: 8px;
-      opacity: 0;
-      animation: floatStar 1.4s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes floatStar {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-30px);
-        opacity: 0;
-      }
     }
   </style>
 </head>
@@ -204,16 +185,7 @@
       });
     }
 
-    function animateStar(element) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.innerText = '★';
-      const rect = element.getBoundingClientRect();
-      star.style.left = `${rect.left + rect.width / 2}px`;
-      star.style.top = `${rect.top-20}px`;
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), 1200);
-    }
+    
   </script>
 </body>
 </html>
