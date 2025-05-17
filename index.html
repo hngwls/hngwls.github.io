@@ -1,3 +1,4 @@
+<!-- 중간 생략 없이 전체 코드입니다 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +26,9 @@
     }
 
     .letter {
-  position: absolute;
-  font-size: 22px;
-  cursor: pointer;
+      position: absolute;
+      font-size: 22px;
+      cursor: pointer;
     }
 
     #t   { top: 90px;  left: 51%; }
@@ -46,6 +47,21 @@
       height: 95px;
       border: none;
       z-index: 500;
+    }
+
+    .playlist-box {
+      position: absolute;
+      top: 375px;
+      left: 27%;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      z-index: 600;
+    }
+
+    .playlist-title {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #333;
     }
 
     .text-box {
@@ -111,31 +127,42 @@
     #char1 { top: 130px; left: 33%; }
     #char2 { top: 460px; left: 34%; }
     #char3 { top: 520px; left: 59%; }
-
-}
   </style>
 </head>
 <body>
   <div class="left">jin is</div>
 
-  <div id="t" class="letter" onclick="show('t'); animateStar(this)">t</div>
-  <div id="H" class="letter" onclick="show('H'); animateStar(this)">H</div>
-  <div id="M" class="letter" onclick="show('M'); animateStar(this)">月</div>
-  <div id="p" class="letter" onclick="show('p'); animateStar(this)">p</div>
-  <div id="w" class="letter" onclick="show('w'); animateStar(this)">w</div>
-  <div id="th" class="letter" onclick="show('th'); animateStar(this)">th</div>
-  <div id="m" class="letter" onclick="scrollToForm(); show('m'); animateStar(this)">m</div>
+  <div id="t" class="letter" onclick="show('t')">t</div>
+  <div id="H" class="letter" onclick="show('H')">H</div>
+  <div id="M" class="letter" onclick="show('M')">月</div>
+  <div id="p" class="letter" onclick="show('p')">p</div>
+  <div id="w" class="letter" onclick="show('w')">w</div>
+  <div id="th" class="letter" onclick="show('th')">th</div>
+  <div id="m" class="letter" onclick="scrollToForm(); show('m')">m</div>
 
   <img src="char1.png" class="char-img" id="char1" />
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
+  <!-- 기존 유튜브 영상 -->
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     title="YouTube video"
     allow="autoplay"
     allowfullscreen>
   </iframe>
+
+  <!-- YouTube 플레이리스트 -->
+  <div class="playlist-box">
+    <p class="playlist-title">きゅうし さかな くじら</p>
+    <iframe width="250" height="140" 
+      src="https://www.youtube.com/embed/videoseries?list=PLOUe7MhAquNWKgDrbmsWqxHDwgmdkfUZ2&autoplay=1&mute=1" 
+      title="YouTube playlist"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
 
   <div class="text-box" id="reveal"></div>
 
@@ -184,24 +211,6 @@
         alert("오류가 발생했습니다. 다시 시도해주세요.");
       });
     }
-
-    
   </script>
-<!-- YouTube 미니 플레이리스트 - 'w' 왼쪽에 작게 띄움 -->
-<div style="position: absolute; top: 390px; left: 8%; display: flex; align-items: center; gap: 8px; background: #f6f6f6; border: 1px solid #ccc; border-radius: 8px; padding: 6px 10px; font-family: Georgia, serif; z-index: 999;">
-  <div style="width: 28px; height: 28px; background: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;"
-       onclick="document.getElementById('ytplayer').style.display = 'block'; document.getElementById('ytplayer').src += '&autoplay=1'">
-    <div style="color: white; font-size: 13px;">▶</div>
-  </div>
-  <div style="font-size: 12px; color: #222;">jin’s playlist</div>
-</div>
-
-<iframe id="ytplayer"
-        style="display: none; position: absolute; top: 430px; left: 38%; width: 260px; height: 146px; border: none; z-index: 999;"
-        src="https://www.youtube.com/embed/videoseries?list=PLOUe7MhAquNWKgDrbmsWqxHDwgmdkfUZ2&rel=0&modestbranding=1"
-        title="YouTube playlist"
-        allow="autoplay"
-        allowfullscreen>
-</iframe>
 </body>
 </html>
