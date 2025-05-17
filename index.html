@@ -187,17 +187,17 @@
 
     
   </script>
-<!-- YouTube 미니 플레이리스트 (w 왼쪽에 위치) -->
-<div style="position: absolute; top: 390px; left: 34%; display: flex; align-items: center; gap: 10px; background: #fafafa; border: 1px solid #ccc; border-radius: 8px; padding: 7px 12px; font-family: Georgia, serif; z-index: 999;">
-  <div style="width: 34px; height: 34px; background: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;"
+<!-- YouTube 미니 플레이리스트 - 'w' 왼쪽에 작게 띄움 -->
+<div style="position: absolute; top: 390px; left: 38%; display: flex; align-items: center; gap: 8px; background: #f6f6f6; border: 1px solid #ccc; border-radius: 8px; padding: 6px 10px; font-family: Georgia, serif; z-index: 999;">
+  <div style="width: 28px; height: 28px; background: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;"
        onclick="document.getElementById('ytplayer').style.display = 'block'; document.getElementById('ytplayer').src += '&autoplay=1'">
-    <div style="color: white; font-size: 14px;">▶</div>
+    <div style="color: white; font-size: 13px;">▶</div>
   </div>
-  <div style="font-size: 13px; color: #333;">jin’s playlist</div>
+  <div style="font-size: 12px; color: #222;">jin’s playlist</div>
 </div>
 
 <iframe id="ytplayer"
-        style="display: none; position: absolute; top: 440px; left: 34%; width: 280px; height: 158px; border: none; z-index: 999;"
+        style="display: none; position: absolute; top: 430px; left: 38%; width: 260px; height: 146px; border: none; z-index: 999;"
         src="https://www.youtube.com/embed/videoseries?list=PLOUe7MhAquNWKgDrbmsWqxHDwgmdkfUZ2&rel=0&modestbranding=1"
         title="YouTube playlist"
         allow="autoplay"
