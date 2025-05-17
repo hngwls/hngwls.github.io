@@ -112,6 +112,14 @@
     #char2 { top: 460px; left: 34%; }
     #char3 { top: 520px; left: 59%; }
 
+.yt-player {
+  position: absolute;
+  top: 310px;      /* p와 w 사이쯤 */
+  left: 35%;
+  width: 180px;
+  height: 100px;
+  border: none;
+  z-index: 500;
     }
   </style>
 </head>
@@ -187,5 +195,13 @@
 
     
   </script>
+  <!-- 유튜브 미니 플레이어 -->
+<iframe class="yt-player"
+  src="https://www.youtube.com/embed/videoseries?list=PLOUe7MhAquNWKgDrbmsWqxHDwgmdkfUZ2&autoplay=1&mute=1&controls=1&loop=1&playlist=PLOUe7MhAquNWKgDrbmsWqxHDwgmdkfUZ2"
+  title="YouTube playlist"
+  allow="autoplay"
+  allowfullscreen>
+</iframe>
+
 </body>
 </html>
