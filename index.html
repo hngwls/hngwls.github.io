@@ -125,6 +125,7 @@
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
+  <!-- 영상 -->
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     title="YouTube video"
@@ -133,8 +134,10 @@
     frameborder="0">
   </iframe>
 
+  <!-- 텍스트 박스 -->
   <div class="text-box" id="reveal"></div>
 
+  <!-- 입력 폼 -->
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label> n✹m⚝</label>
@@ -158,23 +161,11 @@
 
     function show(key, element) {
       const box = document.getElementById("reveal");
+      const rect = element.getBoundingClientRect();
       box.innerText = texts[key] || '';
+      box.style.left = `${rect.left + rect.width / 2}px`;
+      box.style.top = `${rect.bottom + 8 + window.scrollY}px`;
       box.style.display = 'block';
-
-      if (['t', 'H', 'th', 'm'].includes(key)) {
-        // 고정된 왼쪽 아래
-        box.style.position = 'fixed';
-        box.style.left = '20px';
-        box.style.bottom = '20px';
-        box.style.transform = 'none';
-      } else {
-        // 알파벳 아래에 위치
-        const rect = element.getBoundingClientRect();
-        box.style.position = 'absolute';
-        box.style.left = `${rect.left + rect.width / 2}px`;
-        box.style.top = `${rect.bottom + 8 + window.scrollY}px`;
-        box.style.transform = 'translateX(-50%)';
-      }
     }
 
     function scrollToForm() {
