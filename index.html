@@ -48,13 +48,9 @@
       z-index: 500;
     }
 
-
     .text-box {
       display: none;
       position: absolute;
-      top: 20px;
-      left: 55%;
-      transform: translateX(-50%);
       font-style: italic;
       font-size: 13px;
       background: none;
@@ -117,30 +113,31 @@
 <body>
   <div class="left">jin is</div>
 
-  <div id="t" class="letter" onclick="show('t')">t</div>
-  <div id="H" class="letter" onclick="show('H')">H</div>
-  <div id="M" class="letter" onclick="show('M')">月</div>
-  <div id="p" class="letter" onclick="show('p')">p</div>
-  <div id="w" class="letter" onclick="show('w')">w</div>
-  <div id="th" class="letter" onclick="show('th')">th</div>
-  <div id="m" class="letter" onclick="scrollToForm(); show('m')">m</div>
+  <div id="t" class="letter" onclick="show('t', this)">t</div>
+  <div id="H" class="letter" onclick="show('H', this)">H</div>
+  <div id="M" class="letter" onclick="show('M', this)">月</div>
+  <div id="p" class="letter" onclick="show('p', this)">p</div>
+  <div id="w" class="letter" onclick="show('w', this)">w</div>
+  <div id="th" class="letter" onclick="show('th', this)">th</div>
+  <div id="m" class="letter" onclick="scrollToForm(); show('m', this)">m</div>
 
   <img src="char1.png" class="char-img" id="char1" />
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
-  <!-- 기존 유튜브 영상 -->
+  <!-- 영상 -->
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     title="YouTube video"
     allow="autoplay"
-    style="pointer-events: none;"     
+    style="pointer-events: none;"
     frameborder="0">
   </iframe>
 
-
+  <!-- 텍스트 박스 -->
   <div class="text-box" id="reveal"></div>
 
+  <!-- 입력 폼 -->
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label> n✹m⚝</label>
@@ -162,9 +159,12 @@
       m: "'m' is about memories."
     };
 
-    function show(key) {
+    function show(key, element) {
       const box = document.getElementById("reveal");
+      const rect = element.getBoundingClientRect();
       box.innerText = texts[key] || '';
+      box.style.left = `${rect.left + rect.width / 2}px`;
+      box.style.top = `${rect.bottom + 8 + window.scrollY}px`;
       box.style.display = 'block';
     }
 
