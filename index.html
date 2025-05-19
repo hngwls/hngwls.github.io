@@ -41,9 +41,9 @@
     .video-embed {
       position: absolute;
       top: 130px;
-      left: 59%;
-      width: 153px;
-      height: 86px;
+      left: 55%;
+      width: 170px;
+      height: 95px;
       border: none;
       z-index: 500;
     }
@@ -125,7 +125,6 @@
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
-  <!-- 영상 -->
   <iframe class="video-embed"
     src="https://www.youtube.com/embed/aKIf0UeFUT0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     title="YouTube video"
@@ -134,10 +133,8 @@
     frameborder="0">
   </iframe>
 
-  <!-- 텍스트 박스 -->
   <div class="text-box" id="reveal"></div>
 
-  <!-- 입력 폼 -->
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
       <label> n✹m⚝</label>
@@ -159,13 +156,23 @@
       m: "'m' is about memories."
     };
 
+    const leftAligned = ['t', 'H', 'th', 'm'];
+
     function show(key, element) {
       const box = document.getElementById("reveal");
       const rect = element.getBoundingClientRect();
+      const scrollY = window.scrollY;
+
       box.innerText = texts[key] || '';
-      box.style.left = `${rect.left + rect.width / 2}px`;
-      box.style.top = `${rect.bottom + 8 + window.scrollY}px`;
       box.style.display = 'block';
+
+      box.style.top = `${rect.bottom + scrollY + 6}px`;
+
+      if (leftAligned.includes(key)) {
+        box.style.left = `${rect.left + window.scrollX - 5}px`;
+      } else {
+        box.style.left = `${rect.left + window.scrollX + rect.width + 5}px`;
+      }
     }
 
     function scrollToForm() {
