@@ -165,9 +165,9 @@
 
       box.innerText = texts[key] || '';
       box.style.display = 'block';
-
       box.style.top = `${rect.bottom + scrollY + 6}px`;
 
+      const leftAligned = ['t', 'H', 'th', 'm'];
       if (leftAligned.includes(key)) {
         box.style.left = `${rect.left + window.scrollX - 5}px`;
       } else {
