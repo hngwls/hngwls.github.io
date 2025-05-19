@@ -61,7 +61,7 @@
       max-width: 80%;
       white-space: pre-wrap;
       z-index: 999;
-      text-align: center;
+      text-align: left;
     }
 
     .form-box {
@@ -162,17 +162,25 @@
       const box = document.getElementById("reveal");
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY;
+      const scrollX = window.scrollX;
 
       box.innerText = texts[key] || '';
       box.style.display = 'block';
       box.style.top = `${rect.bottom + scrollY + 6}px`;
 
       const leftAligned = ['t', 'H', 'th', 'm'];
-      if (leftAligned.includes(key)) {
-        box.style.left = `${rect.left + window.scrollX - 5}px`;
-      } else {
-        box.style.left = `${rect.left + window.scrollX + rect.width + 5}px`;
-      }
+  if (leftAligned.includes(key)) {
+    // 텍스트의 오른쪽 끝을 알파벳 왼쪽에 맞추기
+    box.style.left = `${rect.left + scrollX}px`;
+    box.style.transform = 'translateX(-100%)';
+    box.style.textAlign = 'right';
+  } else {
+    // 오른쪽 아래에 그대로
+    box.style.left = `${rect.right + scrollX}px`;
+    box.style.transform = 'translateX(0%)';
+    box.style.textAlign = 'left';
+  }
+
     }
 
     function scrollToForm() {
