@@ -155,6 +155,10 @@
     </form>
   </div>
 
+<audio autoplay loop muted id="bg-audio" style="display:none">
+  <source src="somuch.mp3" type="audio/mpeg">
+</audio>
+
   <script>
     const texts = {
       t: "'t' *s ab✪ut th✪ughts and tales.",
@@ -220,6 +224,13 @@
         jinshown = true;
       } 
     } 
+    
+    window.addEventListener('click', () => {
+  const audio = document.getElementById('bg-audio');
+  audio.muted = false;
+  audio.play();
+}, { once: true });
+
   </script>
 </body>
 </html>
