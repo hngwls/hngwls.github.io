@@ -99,6 +99,13 @@
       padding: 4px;
     }
 
+    .left span { 
+      font-style: italic; 
+      font-size: 13px; 
+      display: block; 
+      margin-top: 4px; 
+    } 
+    
     .char-img {
       position: absolute;
       width: 50px;
@@ -111,8 +118,11 @@
   </style>
 </head>
 <body>
-  <div class="left">jin is</div>
-
+  <div class="left" onclicK="showJinText()">
+    jin is<br>
+  <span id="jin-floating"></span>
+</div> 
+  
   <div id="t" class="letter" onclick="show('t', this)">t</div>
   <div id="H" class="letter" onclick="show('H', this)">H</div>
   <div id="M" class="letter" onclick="show('M', this)">月</div>
@@ -201,6 +211,15 @@
         alert("오류가 발생했습니다. 다시 시도해주세요.");
       });
     }
+    
+    let jinshown = false; 
+    
+    function showjinText() { 
+      if (!jinShown) { 
+        document.getElementById("jin-floating").innerText = "lost in thoughts of you"; 
+        jinShown = true;
+      } 
+    } 
   </script>
 </body>
 </html>
