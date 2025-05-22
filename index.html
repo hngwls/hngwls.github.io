@@ -159,6 +159,15 @@
   <source src="https://hngwls.github.io/jinisgam.github.io/somuch.mp3" type="audio/mpeg">
 </audio>
 
+  
+  <script>
+    window.addEventListener('click', () => {
+      const audio = document.getElementById('bg-audio');
+      audio.muted = false;
+      audio.play();
+    }, { once: true });
+  </script>
+  
   <script>
     const texts = {
       t: "'t' *s ab✪ut th✪ughts and tales.",
