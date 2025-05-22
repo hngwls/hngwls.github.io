@@ -164,7 +164,7 @@
   const audio = new Audio(tracks[randomIndex]);
   audio.loop = true;
 
-  window.addEventListener('click', () => {
+  document.body.addEventListener('click', () => {
     audio.muted = false;
     audio.play().catch(e => {
       console.log("Autoplay error:", e);
