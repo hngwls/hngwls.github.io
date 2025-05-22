@@ -155,18 +155,19 @@
     </form>
   </div>
 
-<audio autoplay loop id="bg-audio" style="display:none">
-  <source src="https://hngwls.github.io/somuch.mp3" type="audio/mpeg">
-</audio>
+<script>
+  const tracks = [
+    "https://hngwls.github.io/somuch.mp3",
+    "https://hngwls.github.io/strange%20me.mp3"
+  ];
+  const randomIndex = Math.floor(Math.random() * tracks.length);
+  const audio = new Audio(tracks[randomIndex]);
+  audio.loop = true;
 
-  
-  <script>
-    window.addEventListener('click', () => {
-      const audio = document.getElementById('bg-audio');
-      audio.muted = false;
-      audio.play();
-    }, { once: true });
-  </script>
+  window.addEventListener('click', () => {
+    audio.play();
+  }, { once: true });
+</script>
   
   <script>
     const texts = {
@@ -233,12 +234,6 @@
         jinshown = true;
       } 
     } 
-    
-    window.addEventListener('click', () => {
-  const audio = document.getElementById('bg-audio');
-  audio.muted = false;
-  audio.play();
-}, { once: true });
 
   </script>
 </body>
