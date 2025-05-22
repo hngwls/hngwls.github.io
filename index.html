@@ -166,7 +166,9 @@
 
   window.addEventListener('click', () => {
     audio.muted = false;
-    audio.play();
+    audio.play().catch(e => {
+      console.log("Autoplay error:", e);
+      });
   }, { once: true });
 </script>
   
