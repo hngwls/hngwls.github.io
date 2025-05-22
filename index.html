@@ -120,8 +120,8 @@
 <body>
   <div class="left" onclick="showjinText()">
     jin is<br>
-  <span id="jin-floating"></span>
-</div> 
+    <span id="jin-floating"></span>
+  </div> 
   
   <div id="t" class="letter" onclick="show('t', this)">t</div>
   <div id="H" class="letter" onclick="show('H', this)">H</div>
@@ -155,23 +155,30 @@
     </form>
   </div>
 
-<script>
-  const tracks = [
-    "https://hngwls.github.io/somuch.mp3",
-    "https://hngwls.github.io/strange%20me.mp3",
-    "https://hngwls.github.io/gocilge.mp3"
-  ];
-  const randomIndex = Math.floor(Math.random() * tracks.length);
-  const audio = new Audio(tracks[randomIndex]);
-  audio.loop = true;
+  <script>
+    const tracks = [
+      "https://hngwls.github.io/somuch.mp3",
+      "https://hngwls.github.io/strange%20me.mp3",
+      "https://hngwls.github.io/gocilge.mp3"
+    ];
 
-  document.body.addEventListener('click', () => {
-    audio.muted = false;
-    audio.play().catch(e => {
-      console.log("Autoplay blocked:", e);
-      });
-  }, { once: true });
-</script>
+    let started = false;
+    let audio = new Audio();
+
+    function playRandomSong() {
+      const index = Math.floor(Math.random() * tracks.length);
+      audio.src = tracks[index];
+      audio.play();
+    }
+
+    document.body.addEventListener("click", () => {
+      if (!started) {
+        started = true;
+        playRandomSong();
+        audio.addEventListener("ended", playRandomSong);
+      }
+    }, { once: true });
+  </script>
   
   <script>
     const texts = {
@@ -196,19 +203,15 @@
       box.style.display = 'block';
       box.style.top = `${rect.bottom + scrollY + 6}px`;
 
-      const leftAligned = ['t', 'H', 'th', 'm'];
-  if (leftAligned.includes(key)) {
-    // 텍스트의 오른쪽 끝을 알파벳 왼쪽에 맞추기
-    box.style.left = `${rect.left + scrollX}px`;
-    box.style.transform = 'translateX(-100%)';
-    box.style.textAlign = 'right';
-  } else {
-    // 오른쪽 아래에 그대로
-    box.style.left = `${rect.right + scrollX}px`;
-    box.style.transform = 'translateX(0%)';
-    box.style.textAlign = 'left';
-  }
-
+      if (leftAligned.includes(key)) {
+        box.style.left = `${rect.left + scrollX}px`;
+        box.style.transform = 'translateX(-100%)';
+        box.style.textAlign = 'right';
+      } else {
+        box.style.left = `${rect.right + scrollX}px`;
+        box.style.transform = 'translateX(0%)';
+        box.style.textAlign = 'left';
+      }
     }
 
     function scrollToForm() {
@@ -229,16 +232,14 @@
         alert("오류가 발생했습니다. 다시 시도해주세요.");
       });
     }
-    
-    let jinshown = false; 
-    
-    function showjinText() { 
-      if (!jinshown) { 
-        document.getElementById("jin-floating").innerText = "lost in thoughts of you"; 
-        jinshown = true;
-      } 
-    } 
 
+    let jinshown = false;
+    function showjinText() {
+      if (!jinshown) {
+        document.getElementById("jin-floating").innerText = "lost in thoughts of you";
+        jinshown = true;
+      }
+    }
   </script>
 </body>
 </html>
