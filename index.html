@@ -60,8 +60,9 @@
       border-radius: 0;
       max-width: 80%;
       white-space: pre-wrap;
-      z-index: 999;
+      z-index: 9999; /* z-index 높임 */
       text-align: left;
+      pointer-events: none; /* 클릭 방지 */
     }
 
     .form-box {
@@ -201,7 +202,7 @@
 
       box.innerText = texts[key] || '';
       box.style.display = 'block';
-      box.style.top = `${rect.bottom + scrollY + 6}px`;
+      box.style.top = `${rect.bottom + scrollY + 8}px`;
 
       if (leftAligned.includes(key)) {
         box.style.left = `${rect.left + scrollX}px`;
@@ -236,8 +237,7 @@
     let jinshown = false;
     function showjinText() {
       if (!jinshown) {
-        document.getElementById("jin-floating").innerText = "It might hurt, but if it builds a deeper love, I’ll take it.
-I like us - so different, but still us.";
+        document.getElementById("jin-floating").innerText = "It might hurt, but if it builds a deeper love, I’ll take it.\nI like us - so different, but still us.";
         jinshown = true;
       }
     }
