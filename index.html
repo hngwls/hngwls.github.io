@@ -47,7 +47,7 @@
       height: 95px;
       border: none;
       z-index: 500;
-      pointer-events: none; /* 기존 iframe의 클릭 방지 유지 */
+      pointer-events: none; /* 클릭 방지 유지 */
     }
 
     .text-box {
@@ -62,9 +62,9 @@
       border-radius: 0;
       max-width: 80%;
       white-space: pre-wrap;
-      z-index: 9999; /* z-index 높임 */
+      z-index: 9999;
       text-align: left;
-      pointer-events: none; /* 클릭 방지 */
+      pointer-events: none;
     }
 
     .form-box {
@@ -138,7 +138,7 @@
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
-  <!-- 기존 iframe 제거 → API가 주입할 div로 교체 -->
+  <!-- API가 주입할 자리에 div 유지 -->
   <div id="yt-player" class="video-embed"></div>
 
   <div class="text-box" id="reveal"></div>
@@ -153,7 +153,7 @@
     </form>
   </div>
 
-  <!-- 랜덤 오디오(기존 동작 유지) -->
+  <!-- 랜덤 오디오: 최초 클릭 시에만 재생 (기존 동작 유지) -->
   <script>
     const tracks = [
       "https://hngwls.github.io/somuch.mp3",
@@ -167,7 +167,7 @@
     function playRandomSong() {
       const index = Math.floor(Math.random() * tracks.length);
       audio.src = tracks[index];
-      audio.play();
+      audio.play().catch(()=>{});
     }
 
     document.body.addEventListener("click", () => {
@@ -242,8 +242,13 @@
     }
   </script>
 
-  <!-- YouTube Iframe API 로드 및 자동재생(음소거) 보장 -->
+  <!-- YouTube Iframe API 로드 및 ‘자동재생(음소거)’ 강제 보정 -->
   <script>
+    const YT_VIDEO_ID = 'aKIf0UeFUT0';
+    let ytPlayer = null;
+    let tried = 0;
+    const MAX_TRIES = 5;
+
     // 1) API 스크립트 로드
     (function loadYT() {
       const tag = document.createElement('script');
@@ -253,26 +258,95 @@
 
     // 2) API 준비되면 플레이어 생성
     function onYouTubeIframeAPIReady() {
-      new YT.Player('yt-player', {
-        videoId: 'aKIf0UeFUT0', // 기존 embed의 영상 ID
+      ytPlayer = new YT.Player('yt-player', {
+        host: 'https://www.youtube.com',
+        videoId: YT_VIDEO_ID,
         playerVars: {
           autoplay: 1,
           mute: 1,
           controls: 0,
           modestbranding: 1,
           rel: 0,
-          playsinline: 1   // iOS에서 인라인 재생 + 자동재생 성공률 ↑
+          playsinline: 1,
+          enablejsapi: 1,
+          origin: window.location.origin
         },
         events: {
-          onReady: function (e) {
-            // 일부 브라우저에서 확실히 적용되도록 재보장
-            try {
-              e.target.mute();
-              e.target.playVideo();
-            } catch (_) {}
-          }
+          onReady: handleReady,
+          onStateChange: handleStateChange
         }
       });
+    }
+
+    // 3) 준비 이벤트: 음소거 후 재생 시도 + allow 속성 강제 주입
+    function handleReady(e) {
+      safeSetAllowOnIframe();
+      forcePlay(e.target);
+
+      // 혹시 실패하면 몇 번 재시도
+      retryPlayLoop();
+    }
+
+    function handleStateChange(e) {
+      // 재생이 시작되면(1) 재시도 중단
+      if (e.data === YT.PlayerState.PLAYING) {
+        tried = MAX_TRIES; // 루프 종료
+      }
+    }
+
+    function forcePlay(player) {
+      try {
+        player.mute();
+        player.setVolume(0);
+        const p = player.playVideo();
+        if (p && typeof p.then === 'function') {
+          p.catch(()=>{}); // promise 거부 보호
+        }
+      } catch (_) {}
+    }
+
+    function retryPlayLoop() {
+      const tick = () => {
+        if (!ytPlayer || tried >= MAX_TRIES) return;
+        const state = ytPlayer.getPlayerState ? ytPlayer.getPlayerState() : -1;
+        // 1초 간격으로 재시도 (UNSTARTED(-1)/CUED(5)/PAUSED(2) 상태 등일 때)
+        if (state !== YT.PlayerState.PLAYING) {
+          tried++;
+          forcePlay(ytPlayer);
+          safeSetAllowOnIframe();
+          setTimeout(tick, 1000);
+        }
+      };
+      setTimeout(tick, 700);
+    }
+
+    // 4) 사용자가 어쨌든 한 번 클릭/터치하면 다시 시도 (정책 회피)
+    const resumeOnce = () => {
+      if (ytPlayer) {
+        safeSetAllowOnIframe();
+        forcePlay(ytPlayer);
+      }
+      window.removeEventListener('click', resumeOnce, { capture: true });
+      window.removeEventListener('touchstart', resumeOnce, { capture: true });
+    };
+    window.addEventListener('click', resumeOnce, { capture: true, once: true });
+    window.addEventListener('touchstart', resumeOnce, { capture: true, once: true });
+
+    // 5) API가 만든 iframe에 allow 속성 강제 부여
+    function safeSetAllowOnIframe() {
+      try {
+        const container = document.getElementById('yt-player');
+        const iframe = container && container.querySelector('iframe');
+        if (iframe) {
+          const allow = iframe.getAttribute('allow') || '';
+          // 필요한 권한이 없으면 추가
+          if (!/autoplay/.test(allow)) {
+            iframe.setAttribute('allow', (allow ? allow + '; ' : '') + 'autoplay; encrypted-media; fullscreen; picture-in-picture');
+          }
+          // 혹시나 모달/레이어 위에 가려지지 않도록 z-index 보정(선택)
+          iframe.style.zIndex = '500';
+        }
+      } catch (_) {}
     }
   </script>
 </body>
