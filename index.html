@@ -138,7 +138,7 @@
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
-  <!-- API가 주입할 자리에 div 유지 -->
+  <!-- YouTube가 주입할 자리 -->
   <div id="yt-player" class="video-embed"></div>
 
   <div class="text-box" id="reveal"></div>
@@ -153,32 +153,8 @@
     </form>
   </div>
 
-  <!-- 랜덤 오디오: 최초 클릭 시에만 재생 (기존 동작 유지) -->
-  <script>
-    const tracks = [
-      "https://hngwls.github.io/somuch.mp3",
-      "https://hngwls.github.io/strange%20me.mp3",
-      "https://hngwls.github.io/gochilge.mp3"
-    ];
+  <!-- ▼ 배경음악(터치 시 재생) 기능 제거됨 -->
 
-    let started = false;
-    let audio = new Audio();
-
-    function playRandomSong() {
-      const index = Math.floor(Math.random() * tracks.length);
-      audio.src = tracks[index];
-      audio.play().catch(()=>{});
-    }
-
-    document.body.addEventListener("click", () => {
-      if (!started) {
-        started = true;
-        playRandomSong();
-        audio.addEventListener("ended", playRandomSong);
-      }
-    }, { once: true });
-  </script>
-  
   <script>
     const texts = {
       t: "'t' *s ab✪ut th✪ughts and tales.",
@@ -242,9 +218,10 @@
     }
   </script>
 
-  <!-- YouTube Iframe API 로드 및 ‘자동재생(음소거)’ 강제 보정 -->
+  <!-- YouTube Iframe API 로드 및 ‘자동재생(음소거)’ 보정 -->
   <script>
-    const YT_VIDEO_ID = 'aKIf0UeFUT0';
+    // 새 영상 ID로 교체: https://youtu.be/OddT848tScQ
+    const YT_VIDEO_ID = 'OddT848tScQ';
     let ytPlayer = null;
     let tried = 0;
     const MAX_TRIES = 5;
@@ -282,13 +259,10 @@
     function handleReady(e) {
       safeSetAllowOnIframe();
       forcePlay(e.target);
-
-      // 혹시 실패하면 몇 번 재시도
       retryPlayLoop();
     }
 
     function handleStateChange(e) {
-      // 재생이 시작되면(1) 재시도 중단
       if (e.data === YT.PlayerState.PLAYING) {
         tried = MAX_TRIES; // 루프 종료
       }
@@ -309,7 +283,6 @@
       const tick = () => {
         if (!ytPlayer || tried >= MAX_TRIES) return;
         const state = ytPlayer.getPlayerState ? ytPlayer.getPlayerState() : -1;
-        // 1초 간격으로 재시도 (UNSTARTED(-1)/CUED(5)/PAUSED(2) 상태 등일 때)
         if (state !== YT.PlayerState.PLAYING) {
           tried++;
           forcePlay(ytPlayer);
@@ -320,7 +293,7 @@
       setTimeout(tick, 700);
     }
 
-    // 4) 사용자가 어쨌든 한 번 클릭/터치하면 다시 시도 (정책 회피)
+    // 4) 사용자가 한 번 클릭/터치하면 비디오 재생 재시도 (브라우저 정책 우회 보조)
     const resumeOnce = () => {
       if (ytPlayer) {
         safeSetAllowOnIframe();
@@ -339,11 +312,9 @@
         const iframe = container && container.querySelector('iframe');
         if (iframe) {
           const allow = iframe.getAttribute('allow') || '';
-          // 필요한 권한이 없으면 추가
           if (!/autoplay/.test(allow)) {
             iframe.setAttribute('allow', (allow ? allow + '; ' : '') + 'autoplay; encrypted-media; fullscreen; picture-in-picture');
           }
-          // 혹시나 모달/레이어 위에 가려지지 않도록 z-index 보정(선택)
           iframe.style.zIndex = '500';
         }
       } catch (_) {}
