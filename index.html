@@ -47,7 +47,7 @@
       height: 95px;
       border: none;
       z-index: 500;
-      pointer-events: none; /* 클릭 방지 유지 */
+      pointer-events: none; /* 클릭 방지 */
     }
 
     .text-box {
@@ -55,15 +55,11 @@
       position: absolute;
       font-style: italic;
       font-size: 13px;
-      background: none;
       color: #333;
-      border: none;
       padding: 5px;
-      border-radius: 0;
       max-width: 80%;
       white-space: pre-wrap;
       z-index: 9999;
-      text-align: left;
       pointer-events: none;
     }
 
@@ -75,10 +71,6 @@
       padding: 11px;
       left: 55%;
       transform: translateX(-50%);
-    }
-
-    .form-box label {
-      font-size: 15px;
     }
 
     .form-box input,
@@ -99,20 +91,11 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 7px 11px;
     }
 
-    .left span { 
-      font-style: italic; 
-      font-size: 13px; 
-      display: block; 
-      margin-top: 4px; 
-    } 
-    
     .char-img {
       position: absolute;
       width: 50px;
-      height: auto;
     }
 
     #char1 { top: 120px; left: 33%; }
@@ -120,12 +103,13 @@
     #char3 { top: 515px; left: 59%; }
   </style>
 </head>
+
 <body>
   <div class="left" onclick="showjinText()">
     jin is<br>
     <span id="jin-floating"></span>
   </div> 
-  
+
   <div id="t" class="letter" onclick="show('t', this)">t</div>
   <div id="H" class="letter" onclick="show('H', this)">H</div>
   <div id="M" class="letter" onclick="show('M', this)">月</div>
@@ -138,94 +122,62 @@
   <img src="char2.png" class="char-img" id="char2" />
   <img src="char3.png" class="char-img" id="char3" />
 
+  <!-- 🔽 유튜브 영상 (기존 mp4 위치) -->
+  <iframe
+    class="video-embed"
+    src="https://www.youtube.com/embed/_0Ecqv3qPUw?autoplay=1&mute=1&controls=0&rel=0&playsinline=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+  ></iframe>
 
-<video
-  class="video-embed"
-  src="./V20241103_082206000_0F203984-5F0F-45E5-8125-88E57ED44684.mp4"
-  autoplay
-  muted
-  loop
-  playsinline
-></video>
-
-<div class="text-box" id="reveal"></div>
+  <div class="text-box" id="reveal"></div>
 
   <div class="form-box" id="form">
     <form onsubmit="sendMessage(event)">
-      <label> n✹m⚝</label>
       <input type="text" name="name" placeholder="*S" required />
-      <label> m⚝s✹g⚝</label>
       <textarea name="message" rows="3" placeholder="✹s" required></textarea>
       <button type="submit">S✺nd!</button>
     </form>
   </div>
 
-  <!-- ▼ 배경음악(터치 시 재생) 기능 제거됨 -->
-
   <script>
     const texts = {
-      t: "'t' *s ab✪ut th✪ughts and tales.",
-      H: "'H' ✼s ab✪ut h✼dden th✼ngs.",
-      M: "'月' ✵s ab✪ut m✪✪n and mem✪ry.",
-      p: "'p' ≛s ab✪ut p≛ctures and p✪etry.",
-      w: "'w' ⊛s ab✪ut wander⊛ng and w✪nder⊛ng.",
-      th: "'th' ✰s ab✪ut th✪ughts and the✪r✰es.",
+      t: "'t' is about thoughts and tales.",
+      H: "'H' is about hidden things.",
+      M: "'月' is about moon and memory.",
+      p: "'p' is about pictures and poetry.",
+      w: "'w' is about wandering.",
+      th: "'th' is about theories.",
       m: "'m' is about memories."
     };
 
-    const leftAligned = ['t', 'H', 'th', 'm'];
+    const leftAligned = ['t','H','th','m'];
 
-    function show(key, element) {
+    function show(key, el) {
       const box = document.getElementById("reveal");
-      const rect = element.getBoundingClientRect();
-      const scrollY = window.scrollY;
-      const scrollX = window.scrollX;
-
-      box.innerText = texts[key] || '';
-      box.style.display = 'block';
-      box.style.top = `${rect.bottom + scrollY + 8}px`;
-
-      if (leftAligned.includes(key)) {
-        box.style.left = `${rect.left + scrollX}px`;
-        box.style.transform = 'translateX(-100%)';
-        box.style.textAlign = 'right';
-      } else {
-        box.style.left = `${rect.right + scrollX}px`;
-        box.style.transform = 'translateX(0%)';
-        box.style.textAlign = 'left';
-      }
+      const r = el.getBoundingClientRect();
+      box.innerText = texts[key];
+      box.style.display = "block";
+      box.style.top = r.bottom + window.scrollY + 8 + "px";
+      box.style.left = r.right + window.scrollX + "px";
     }
 
     function scrollToForm() {
-      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("form").scrollIntoView({behavior:"smooth"});
     }
 
     function sendMessage(e) {
       e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
       fetch("https://script.google.com/macros/s/AKfycbyrsg5zHjNSKNWP3KoMPMxxKhU64CDNuNDnDLBg3DWCl71Kw2_IcqsirvF6M70cXZ4/exec", {
-        method: "POST",
-        body: new URLSearchParams(data)
-      }).then(() => {
-        alert("메시지가 전송되었습니다.");
-        form.reset();
-      }).catch(() => {
-        alert("오류가 발생했습니다. 다시 시도해주세요.");
-      });
+        method:"POST",
+        body:new URLSearchParams(new FormData(e.target))
+      }).then(()=>alert("전송 완료"));
     }
 
-    let jinshown = false;
     function showjinText() {
-      if (!jinshown) {
-        document.getElementById("jin-floating").innerText =
-          "It might hurt, but if it builds a deeper love, I’ll take it.\nI like us - so different, but still us.";
-        jinshown = true;
-      }
+      document.getElementById("jin-floating").innerText =
+        "It might hurt, but if it builds a deeper love, I’ll take it.";
     }
   </script>
-
-  <!-- background video (mp4) -->
- 
 </body>
 </html>
